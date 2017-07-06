@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((800, 600))
 
 cam = None
 pygame.camera.init()
-cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
+cam = pygame.camera.Camera(pygame.camera.list_cameras()[-1])
 cam.start()
 
 def loop(should_save=False):
