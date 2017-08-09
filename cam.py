@@ -2,6 +2,7 @@ import pygame
 import pygame.camera
 from pygame.transform import scale
 import os
+import time
 
 from PIL import Image, ImageEnhance
 from subprocess import call
@@ -43,16 +44,20 @@ def loop(should_save=False):
 	pygame.display.flip()
 
 	if should_save:
+		# Setup variables
+		timestring = time.strftime("%Y-%m-%d_%H-%M-%S_")
+
 		# Save image
 		current_path = os.path.dirname(os.path.abspath(__file__))
-		bitmap_filename = os.path.join(current_path, 'snap.bmp')
+		bitmap_filename = os.path.join(current_path, timestring + 'snap.bmp')
 		im.save(bitmap_filename, 'BMP')
 
 		# Trace image to SVG
-		call(["potrace", "-o", "snap.svg", "-s", bitmap_filename])
+		vector_filename = os.path.join(current_path, timestring + 'snap.svg')
+		call(["potrace", "-o", vector_filename, "-s", bitmap_filename])
 
 		# Open Inkscape
-		call(["inkscape", "snap.svg"])
+		call(["inkscape", vector_filename])
 
 		# Small delay feels good
 		pygame.time.wait(200)
