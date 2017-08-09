@@ -7,7 +7,7 @@ from PIL import Image, ImageEnhance
 from subprocess import call
 
 pygame.init()
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
 
 cam = None
 pygame.camera.init()
@@ -72,6 +72,9 @@ def main():
 					should_exit = True
 				if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
 					should_save = True
+			if event.type == pygame.VIDEORESIZE:
+				# TODO Scaling fails randomly after resize, investigate
+				screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
 
 		# TODO limit framerate?
 		loop(should_save)
