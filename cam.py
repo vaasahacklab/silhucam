@@ -1,7 +1,7 @@
 import pygame
 import pygame.camera
 from pygame.transform import scale
-import os
+import os, sys
 import time
 
 from PIL import Image, ImageEnhance
@@ -56,8 +56,9 @@ def loop(should_save=False):
 		# Trace image to SVG
 		call(["potrace", "-o", vector_filename, "-s", bitmap_filename])
 
-		# Open Inkscape
-		call(["inkscape", vector_filename])
+		# Open Inkscape if not disabled
+		if '--no-inkscape' not in sys.argv:
+			call(["inkscape", vector_filename])
 
 		# Small delay feels good
 		pygame.time.wait(200)
