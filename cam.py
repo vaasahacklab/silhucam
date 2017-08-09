@@ -45,11 +45,11 @@ def loop(should_save=False):
 	if should_save:
 		# Save image
 		current_path = os.path.dirname(os.path.abspath(__file__))
-		filename = os.path.join(current_path, 'snap.bmp')
-		im.save(filename, 'BMP')
+		bitmap_filename = os.path.join(current_path, 'snap.bmp')
+		im.save(bitmap_filename, 'BMP')
 
 		# Trace image to SVG
-		call(["potrace", "-o", "snap.svg", "-s", filename])
+		call(["potrace", "-o", "snap.svg", "-s", bitmap_filename])
 
 		# Open Inkscape
 		call(["inkscape", "snap.svg"])
