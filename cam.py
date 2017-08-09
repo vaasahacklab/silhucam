@@ -1,5 +1,6 @@
 import pygame
 import pygame.camera
+from pygame.transform import scale
 import os
 
 from PIL import Image, ImageEnhance
@@ -36,7 +37,8 @@ def loop(should_save=False):
 	img = pygame.image.fromstring(raw_str, im.size, 'RGB')
 
 	# Disply image
-	screen.blit(img,(0,0))
+	img_to_screen = scale(img, screen.get_size())
+	screen.blit(img_to_screen,(0,0))
 
 	pygame.display.flip()
 
