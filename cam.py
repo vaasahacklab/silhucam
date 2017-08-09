@@ -45,15 +45,15 @@ def loop(should_save=False):
 
 	if should_save:
 		# Setup variables
+		current_path = os.path.dirname(os.path.abspath(__file__))
 		timestring = time.strftime("%Y-%m-%d_%H-%M-%S_")
+		bitmap_filename = os.path.join(current_path, timestring + 'snap.bmp')
+		vector_filename = os.path.join(current_path, timestring + 'snap.svg')
 
 		# Save image
-		current_path = os.path.dirname(os.path.abspath(__file__))
-		bitmap_filename = os.path.join(current_path, timestring + 'snap.bmp')
 		im.save(bitmap_filename, 'BMP')
 
 		# Trace image to SVG
-		vector_filename = os.path.join(current_path, timestring + 'snap.svg')
 		call(["potrace", "-o", vector_filename, "-s", bitmap_filename])
 
 		# Open Inkscape
